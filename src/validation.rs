@@ -715,7 +715,6 @@ const GLOBAL_EXTENSIONS_POSIX: &[&str] = &[
     "_ctypes_test",
     "_curses",
     "_curses_panel",
-    "_dbm",
     "_posixshmem",
     "_posixsubprocess",
     "_testinternalcapi",
