@@ -33,65 +33,9 @@ pub struct TripleRelease {
 pub static RELEASE_TRIPLES: Lazy<BTreeMap<&'static str, TripleRelease>> = Lazy::new(|| {
     let mut h = BTreeMap::new();
 
-    // macOS.
-    let macos_suffixes = vec!["debug", "pgo", "pgo+lto"];
-    h.insert(
-        "aarch64-apple-darwin",
-        TripleRelease {
-            suffixes: macos_suffixes.clone(),
-            install_only_suffix: "pgo+lto",
-            python_version_requirement: None,
-        },
-    );
-    h.insert(
-        "x86_64-apple-darwin",
-        TripleRelease {
-            suffixes: macos_suffixes,
-            install_only_suffix: "pgo+lto",
-            python_version_requirement: None,
-        },
-    );
-
-    // Windows.
-    h.insert(
-        "i686-pc-windows-msvc",
-        TripleRelease {
-            suffixes: vec!["pgo"],
-            install_only_suffix: "pgo",
-            python_version_requirement: None,
-        },
-    );
-    h.insert(
-        "x86_64-pc-windows-msvc",
-        TripleRelease {
-            suffixes: vec!["pgo"],
-            install_only_suffix: "pgo",
-            python_version_requirement: None,
-        },
-    );
-
-    // The 'shared-' prefix is no longer needed, but we're double-publishing under both names during
-    // the transition period.
-    h.insert(
-        "i686-pc-windows-msvc-shared",
-        TripleRelease {
-            suffixes: vec!["pgo"],
-            install_only_suffix: "pgo",
-            python_version_requirement: None,
-        },
-    );
-    h.insert(
-        "x86_64-pc-windows-msvc-shared",
-        TripleRelease {
-            suffixes: vec!["pgo"],
-            install_only_suffix: "pgo",
-            python_version_requirement: None,
-        },
-    );
-
     // Linux.
-    let linux_suffixes_pgo = vec!["debug", "pgo", "pgo+lto"];
-    let linux_suffixes_nopgo = vec!["debug", "lto", "noopt"];
+    let linux_suffixes_pgo = vec!["pgo", "pgo+lto"];
+    let linux_suffixes_nopgo = vec!["lto", "noopt"];
 
     h.insert(
         "aarch64-unknown-linux-gnu",
@@ -99,42 +43,6 @@ pub static RELEASE_TRIPLES: Lazy<BTreeMap<&'static str, TripleRelease>> = Lazy::
             suffixes: linux_suffixes_nopgo.clone(),
             install_only_suffix: "lto",
             python_version_requirement: None,
-        },
-    );
-
-    h.insert(
-        "ppc64le-unknown-linux-gnu",
-        TripleRelease {
-            suffixes: linux_suffixes_nopgo.clone(),
-            install_only_suffix: "lto",
-            python_version_requirement: Some(VersionReq::parse(">=3.9").unwrap()),
-        },
-    );
-
-    h.insert(
-        "s390x-unknown-linux-gnu",
-        TripleRelease {
-            suffixes: linux_suffixes_nopgo.clone(),
-            install_only_suffix: "lto",
-            python_version_requirement: Some(VersionReq::parse(">=3.9").unwrap()),
-        },
-    );
-
-    h.insert(
-        "armv7-unknown-linux-gnueabi",
-        TripleRelease {
-            suffixes: linux_suffixes_nopgo.clone(),
-            install_only_suffix: "lto",
-            python_version_requirement: Some(VersionReq::parse(">=3.9").unwrap()),
-        },
-    );
-
-    h.insert(
-        "armv7-unknown-linux-gnueabihf",
-        TripleRelease {
-            suffixes: linux_suffixes_nopgo.clone(),
-            install_only_suffix: "lto",
-            python_version_requirement: Some(VersionReq::parse(">=3.9").unwrap()),
         },
     );
 
