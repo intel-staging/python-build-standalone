@@ -60,8 +60,8 @@ fn main_impl() -> Result<()> {
             .arg(
                 Arg::new("organization")
                     .long("org")
+                    .required(true)
                     .action(ArgAction::Set)
-                    .default_value("indygreg")
                     .help("GitHub organization"),
             )
             .arg(
@@ -144,8 +144,8 @@ fn main_impl() -> Result<()> {
             .arg(
                 Arg::new("organization")
                     .long("org")
+                    .required(true)
                     .action(ArgAction::Set)
-                    .default_value("indygreg")
                     .help("GitHub organization"),
             )
             .arg(
